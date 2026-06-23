@@ -6,7 +6,7 @@ DeploySentry is a defensive web surface and deployment exposure monitor for auth
 
 ## Features
 
-- Textual cyberpunk terminal UI
+- Textual terminal UI
 - Direct CLI scan mode
 - Certificate Transparency subdomain lookup through crt.sh
 - Common subdomain fallback wordlist
