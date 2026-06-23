@@ -71,6 +71,26 @@ class Finding(BaseModel):
     pro_verification: dict[str, Any] | None = None
 
 
+class ShodanPort(BaseModel):
+    port: int
+    protocol: str = "tcp"
+    service: str | None = None
+    banner: str | None = None
+
+
+class ShodanHostInfo(BaseModel):
+    ip: str
+    url: str
+    organization: str | None = None
+    isp: str | None = None
+    asn: str | None = None
+    country: str | None = None
+    city: str | None = None
+    hostnames: list[str] = Field(default_factory=list)
+    ports: list[ShodanPort] = Field(default_factory=list)
+    raw_summary: str | None = None
+
+
 class NetworkVerification(BaseModel):
     network_mode: str = "direct"
     tor_enabled: bool = False
@@ -94,6 +114,7 @@ class ScanConfig(BaseModel):
     report_format: Literal["json", "html", "markdown", "all"] = "all"
     use_ct: bool = True
     use_rapiddns: bool = True
+    shodan_enrichment: bool = True
     proxy_file: str | None = None
     proxy_mode: Literal["off", "rotate", "sticky"] = "off"
     tor: bool = False
@@ -111,6 +132,7 @@ class ScanResult(BaseModel):
     dns_records: list[DNSRecord] = Field(default_factory=list)
     services: list[HTTPService] = Field(default_factory=list)
     findings: list[Finding] = Field(default_factory=list)
+    shodan_hosts: list[ShodanHostInfo] = Field(default_factory=list)
     network: NetworkVerification = Field(default_factory=NetworkVerification)
     errors: list[str] = Field(default_factory=list)
 

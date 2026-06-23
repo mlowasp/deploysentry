@@ -33,6 +33,8 @@ async def run_scan(args) -> int:
         elif t == 'dns_resolved' and e['record'].resolved: print(f"[dns] {e['record'].host}")
         elif t == 'service_found': print(f"[service] {e['service'].url} {e['service'].status_code}")
         elif t == 'finding_found': print(f"[finding] {e['finding'].severity.upper()} {e['finding'].url}")
+        elif t == 'shodan_info_found': print(f"[shodan] {e['ip']} {len(e['shodan'].ports)} passive ports")
+        elif t == 'scan_log': print(f"[log] {e.get('message', '')}")
         elif t == 'scan_error': print(f"[error] {e['message']}")
         elif t == 'scan_finished': print('[done] scan finished')
     try:

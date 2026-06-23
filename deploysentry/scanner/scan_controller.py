@@ -9,6 +9,7 @@ from deploysentry.scanner.http_probe import probe_host
 from deploysentry.scanner.dangerous_files import scan_service
 from deploysentry.network.router import NetworkRouter
 from deploysentry.network.pro_verification import resolve_api_key, verify_api_key, redact_api_key
+from deploysentry.scanner.shodan_lookup import fetch_shodan_host
 
 EventCallback = object
 
@@ -19,6 +20,7 @@ class ScanController:
         self.event_cb = event_cb
         self.stop_requested = False
         self.router: NetworkRouter | None = None
+        self._shodan_seen_ips: set[str] = set()
 
     async def emit(self, event: dict) -> None:
         if self.event_cb:
@@ -64,6 +66,49 @@ class ScanController:
                         await self.emit({'type': 'subdomain_found', 'host': clean, 'source': 'cname'})
 
         return list(all_records.values()), sorted(seen)
+
+
+    async def _enrich_shodan(self, result: ScanResult, dns_records: list[DNSRecord]) -> None:
+        """Add passive Shodan host-page enrichment for every discovered A record."""
+        if not self.config.shodan_enrichment:
+            return
+        if self.router is None:
+            return
+
+        ip_to_assets: dict[str, set[str]] = {}
+        for rec in dns_records:
+            for ip in rec.a:
+                ip_to_assets.setdefault(ip, set()).add(rec.host)
+
+        if not ip_to_assets:
+            return
+
+        sem = asyncio.Semaphore(min(self.config.concurrency, 10))
+
+        async def lookup(ip: str, assets: set[str]) -> None:
+            if self.stop_requested or ip in self._shodan_seen_ips:
+                return
+            self._shodan_seen_ips.add(ip)
+            asset_label = ', '.join(sorted(assets)[:3])
+            if len(assets) > 3:
+                asset_label += ', …'
+            await self.emit({'type': 'scan_log', 'message': f'Checking Shodan passive data for {ip}'})
+            async with sem:
+                if self.stop_requested:
+                    return
+                info = await fetch_shodan_host(ip=ip, router=self.router, timeout=self.config.timeout)
+            if info is None or self.stop_requested:
+                return
+            result.shodan_hosts.append(info)
+            await self.emit({
+                'type': 'shodan_info_found',
+                'ip': ip,
+                'asset': asset_label,
+                'assets': sorted(assets),
+                'shodan': info,
+            })
+
+        await asyncio.gather(*(lookup(ip, assets) for ip, assets in ip_to_assets.items()))
 
     async def run(self) -> ScanResult:
         cfg = self.config
@@ -113,6 +158,10 @@ class ScanController:
         result.dns_records = dns_records
         result.subdomains = all_hosts
         resolved_hosts = [r.host for r in dns_records if r.resolved]
+        if self.stop_requested:
+            return result
+
+        await self._enrich_shodan(result, dns_records)
         if self.stop_requested:
             return result
 

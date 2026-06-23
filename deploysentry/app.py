@@ -4,7 +4,6 @@ import os
 import tempfile
 from pathlib import Path
 from textual.app import App, ComposeResult
-from textual import events
 from textual.containers import Container, Horizontal, Vertical
 from textual.screen import ModalScreen
 from textual.widgets import Header, Footer, Input, Button, DataTable, RichLog, Static, Label, TextArea
@@ -29,7 +28,7 @@ class ProxyListModal(ModalScreen[str | None]):
 
     #proxy-modal {
         width: 96;
-        height: 30;
+        height: 28;
         border: heavy #39fff3;
         background: #090d18;
         padding: 1 2;
@@ -50,30 +49,10 @@ class ProxyListModal(ModalScreen[str | None]):
 
     #proxy-textarea {
         height: 15;
-        min-height: 15;
         border: tall #ff3df2;
         background: #03050a;
         color: #d8fff8;
         margin-bottom: 1;
-    }
-
-    #proxy-textarea > .text-area--cursor {
-        background: #55ff99;
-        color: #03050a;
-    }
-
-    #proxy-textarea > .text-area--selection {
-        background: #ff3df2;
-        color: #ffffff;
-    }
-
-    #proxy-textarea > .text-area--gutter {
-        background: #05070d;
-        color: #39fff3;
-    }
-
-    #proxy-textarea > .text-area--placeholder {
-        color: #6f8f9f;
     }
 
     #proxy-modal-buttons {
@@ -99,22 +78,13 @@ class ProxyListModal(ModalScreen[str | None]):
         super().__init__()
         self.initial_text = initial_text
 
-    def on_paste(self, event: events.Paste) -> None:
-        textarea = self.query_one("#proxy-textarea", TextArea)
-        textarea.focus()
-        textarea.text = (textarea.text or "") + event.text
-        event.stop()
-
     def compose(self) -> ComposeResult:
         with Container(id='proxy-modal'):
             yield Label('DEPLOYSENTRY // Proxy List', id='proxy-title')
             yield Static(
-                "Paste one proxy per line. Supported: http://, https://, socks4://, socks5://. "
-                "Tip: in Linux terminals, use Shift+Insert to paste into this TUI. "
-                "Mouse/right-click paste may be intercepted by the terminal. "
-                "Credentials are accepted but never printed in logs or reports. "
-                "Blank lines and # comments are ignored.",
-                id="proxy-help",
+                'Paste one proxy per line. Supported: http://, https://, socks4://, socks5://. '
+                'Credentials are accepted but never printed in logs or reports. Blank lines and # comments are ignored.',
+                id='proxy-help',
             )
             yield TextArea(text=self.initial_text, id='proxy-textarea')
             with Horizontal(id='proxy-modal-buttons'):
@@ -233,6 +203,9 @@ class ApiKeyModal(ModalScreen[str | None]):
         self.dismiss(None)
 
 class DeploySentryApp(App):
+
+    TITLE = "DeploySentry"
+    
     CSS = CYBERPUNK_CSS
     # Input-safe shortcuts only. Plain single-letter shortcuts can intercept typing
     # in Textual Input widgets depending on Textual/terminal versions.
@@ -677,6 +650,24 @@ class DeploySentryApp(App):
             self.log_line(f"[magenta]Live service[/magenta] {svc.url} [{svc.status_code}] {svc.title or ''}")
         elif typ == 'path_checked':
             self.log_line(f"Checked {event['url']} -> {event.get('status')}")
+        elif typ == 'scan_log':
+            self.log_line(f"[dim]{event.get('message', '')}[/dim]")
+        elif typ == 'shodan_info_found':
+            shodan = event['shodan']
+            ip = event.get('ip', shodan.ip)
+            asset = event.get('asset', '—')
+            ports = ', '.join(str(port.port) for port in shodan.ports[:16])
+            if len(shodan.ports) > 16:
+                ports += ', …'
+            org_bits = [shodan.organization, shodan.asn, shodan.country]
+            org_text = ' / '.join(bit for bit in org_bits if bit)
+            details = f"{ip}"
+            if ports:
+                details += f" ports: {ports}"
+            if org_text:
+                details += f" | {org_text}"
+            self.query_one('#findings', DataTable).add_row('INFO', 'Shodan passive data', asset, details, shodan.url)
+            self.log_line(f"[cyan]Shodan passive data for {ip}: {len(shodan.ports)} ports found[/cyan]")
         elif typ == 'finding_found':
             f = event['finding']
             self.query_one('#findings', DataTable).add_row(f.severity.upper(), f.title, f.asset, f.path, f.url)

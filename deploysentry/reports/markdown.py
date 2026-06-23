@@ -4,6 +4,29 @@ from collections import Counter
 from deploysentry.models import ScanResult
 
 
+def _shodan_section(result: ScanResult) -> list[str]:
+    if not result.shodan_hosts:
+        return []
+    lines = [
+        "",
+        "## Shodan Passive Enrichment",
+        "",
+        "This is passive data parsed from Shodan host pages. It is not active port verification.",
+        "",
+        "| IP | Organization | ASN | Country | Ports |",
+        "|---|---|---|---|---|",
+    ]
+    for host in result.shodan_hosts:
+        ports = ", ".join(str(port.port) for port in host.ports[:30])
+        if len(host.ports) > 30:
+            ports += ", …"
+        lines.append(
+            f"| {host.ip} | {host.organization or '—'} | {host.asn or '—'} | "
+            f"{host.country or '—'} | {ports or '—'} |"
+        )
+    return lines
+
+
 def write_markdown_report(result: ScanResult, outdir: Path) -> Path:
     counts = Counter(f.severity for f in result.findings)
     lines = [
@@ -13,6 +36,7 @@ def write_markdown_report(result: ScanResult, outdir: Path) -> Path:
         f"- Finished: {result.finished_at}",
         f"- Subdomains found: {len(result.subdomains)}",
         f"- Live services: {len(result.services)}",
+        f"- Shodan passive hosts: {len(result.shodan_hosts)}",
         "",
         "## Findings by Severity", "",
     ]
@@ -33,6 +57,7 @@ def write_markdown_report(result: ScanResult, outdir: Path) -> Path:
             f"- Route: {f.route.route_label}",
             f"- Recommendation: {f.recommendation}", "",
         ]
+    lines += _shodan_section(result)
     path = outdir / 'report.md'
     path.write_text('\n'.join(lines), encoding='utf-8')
     return path

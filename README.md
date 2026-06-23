@@ -147,3 +147,7 @@ The interactive TUI includes network mode buttons in the top panel:
 Tor mode uses `socks5://127.0.0.1:9050` and requires Tor to already be running locally. Pro Verification Mode requires `DEPLOYSENTRY_API_KEY` to be set in the environment when launching the TUI.
 
 Resolved subdomains now update the Assets table with A, AAAA, and CNAME records as DNS results arrive. Discovered assets, DNS resolutions, and live services also appear as INFO rows in the Findings table so the right-hand panel is useful even before high-severity exposure findings are discovered.
+
+## Shodan Passive Enrichment
+
+DeploySentry passively checks Shodan host pages for every discovered A record, using the current network route when Tor or proxies are enabled. This reads `https://www.shodan.io/host/<ip>` and parses general host information, banners, and ports already indexed by Shodan. It is not active port verification and does not connect to target ports.
