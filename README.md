@@ -4,6 +4,8 @@ DeploySentry is a defensive web surface and deployment exposure monitor for auth
 
 > DeploySentry is intended for authorized defensive scanning only. Only scan domains you own or have permission to test.
 
+![Alt text](/screenshot.png?raw=true "TUI")
+
 ## Features
 
 - Textual terminal UI
