@@ -4,6 +4,7 @@ import os
 import tempfile
 from pathlib import Path
 from textual.app import App, ComposeResult
+from textual import events
 from textual.containers import Container, Horizontal, Vertical
 from textual.screen import ModalScreen
 from textual.widgets import Header, Footer, Input, Button, DataTable, RichLog, Static, Label, TextArea
@@ -28,7 +29,7 @@ class ProxyListModal(ModalScreen[str | None]):
 
     #proxy-modal {
         width: 96;
-        height: 28;
+        height: 30;
         border: heavy #39fff3;
         background: #090d18;
         padding: 1 2;
@@ -49,10 +50,30 @@ class ProxyListModal(ModalScreen[str | None]):
 
     #proxy-textarea {
         height: 15;
+        min-height: 15;
         border: tall #ff3df2;
         background: #03050a;
         color: #d8fff8;
         margin-bottom: 1;
+    }
+
+    #proxy-textarea > .text-area--cursor {
+        background: #55ff99;
+        color: #03050a;
+    }
+
+    #proxy-textarea > .text-area--selection {
+        background: #ff3df2;
+        color: #ffffff;
+    }
+
+    #proxy-textarea > .text-area--gutter {
+        background: #05070d;
+        color: #39fff3;
+    }
+
+    #proxy-textarea > .text-area--placeholder {
+        color: #6f8f9f;
     }
 
     #proxy-modal-buttons {
@@ -78,13 +99,22 @@ class ProxyListModal(ModalScreen[str | None]):
         super().__init__()
         self.initial_text = initial_text
 
+    def on_paste(self, event: events.Paste) -> None:
+        textarea = self.query_one("#proxy-textarea", TextArea)
+        textarea.focus()
+        textarea.text = (textarea.text or "") + event.text
+        event.stop()
+
     def compose(self) -> ComposeResult:
         with Container(id='proxy-modal'):
             yield Label('DEPLOYSENTRY // Proxy List', id='proxy-title')
             yield Static(
-                'Paste one proxy per line. Supported: http://, https://, socks4://, socks5://. '
-                'Credentials are accepted but never printed in logs or reports. Blank lines and # comments are ignored.',
-                id='proxy-help',
+                "Paste one proxy per line. Supported: http://, https://, socks4://, socks5://. "
+                "Tip: in Linux terminals, use Shift+Insert to paste into this TUI. "
+                "Mouse/right-click paste may be intercepted by the terminal. "
+                "Credentials are accepted but never printed in logs or reports. "
+                "Blank lines and # comments are ignored.",
+                id="proxy-help",
             )
             yield TextArea(text=self.initial_text, id='proxy-textarea')
             with Horizontal(id='proxy-modal-buttons'):

@@ -1,0 +1,3 @@
+.venv
+deploysentry.egg-info
+deploysentry/__pycache__
