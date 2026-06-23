@@ -28,7 +28,7 @@ class ProxyListModal(ModalScreen[str | None]):
 
     #proxy-modal {
         width: 96;
-        height: 28;
+        height: 30;
         border: heavy #39fff3;
         background: #090d18;
         padding: 1 2;
