@@ -1,0 +1,2369 @@
+[
+  {
+    "name": "WordPress",
+    "category": "cms",
+    "priority": "mvp",
+    "path_probe": true,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "/wp-content/",
+        "confidence": 0.45,
+        "evidence": "HTML references /wp-content/"
+      },
+      {
+        "type": "html_contains",
+        "value": "/wp-includes/",
+        "confidence": 0.35,
+        "evidence": "HTML references /wp-includes/"
+      },
+      {
+        "type": "meta_generator_contains",
+        "value": "WordPress",
+        "confidence": 0.6,
+        "evidence": "generator meta tag contains WordPress"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "wordpress_",
+        "confidence": 0.45,
+        "evidence": "Set-Cookie contains wordpress_"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "wp-settings-",
+        "confidence": 0.45,
+        "evidence": "Set-Cookie contains wp-settings-"
+      },
+      {
+        "type": "path_exists",
+        "path": "/wp-login.php",
+        "value": "/wp-login.php",
+        "confidence": 0.65,
+        "evidence": "/wp-login.php exists"
+      },
+      {
+        "type": "path_exists",
+        "path": "/wp-admin/",
+        "value": "/wp-admin/",
+        "confidence": 0.45,
+        "evidence": "/wp-admin/ exists or redirects"
+      }
+    ]
+  },
+  {
+    "name": "WooCommerce",
+    "category": "ecommerce",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "woocommerce",
+        "confidence": 0.55,
+        "evidence": "HTML references WooCommerce"
+      },
+      {
+        "type": "html_contains",
+        "value": "wc-cart-fragments",
+        "confidence": 0.55,
+        "evidence": "HTML references wc-cart-fragments"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "woocommerce_",
+        "confidence": 0.5,
+        "evidence": "Set-Cookie contains woocommerce_"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "wp_woocommerce_session_",
+        "confidence": 0.6,
+        "evidence": "Set-Cookie contains wp_woocommerce_session_"
+      }
+    ]
+  },
+  {
+    "name": "Shopify",
+    "category": "ecommerce",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "cdn.shopify.com",
+        "confidence": 0.55,
+        "evidence": "HTML references cdn.shopify.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "Shopify.theme",
+        "confidence": 0.55,
+        "evidence": "HTML contains Shopify.theme"
+      },
+      {
+        "type": "html_contains",
+        "value": "myshopify.com",
+        "confidence": 0.45,
+        "evidence": "HTML references myshopify.com"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "_shopify_",
+        "confidence": 0.5,
+        "evidence": "Set-Cookie contains _shopify_"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "_shopify_y",
+        "confidence": 0.5,
+        "evidence": "Set-Cookie contains _shopify_y"
+      },
+      {
+        "type": "header_contains",
+        "value": "Shopify",
+        "confidence": 0.55,
+        "evidence": "headers reference Shopify"
+      }
+    ]
+  },
+  {
+    "name": "Drupal",
+    "category": "cms",
+    "priority": "mvp",
+    "path_probe": true,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "/sites/default/",
+        "confidence": 0.45,
+        "evidence": "HTML references /sites/default/"
+      },
+      {
+        "type": "html_contains",
+        "value": "Drupal.settings",
+        "confidence": 0.5,
+        "evidence": "HTML contains Drupal.settings"
+      },
+      {
+        "type": "meta_generator_contains",
+        "value": "Drupal",
+        "confidence": 0.65,
+        "evidence": "generator meta tag contains Drupal"
+      },
+      {
+        "type": "header_contains",
+        "value": "X-Drupal-Cache",
+        "confidence": 0.65,
+        "evidence": "headers contain X-Drupal-Cache"
+      },
+      {
+        "type": "header_contains",
+        "value": "X-Generator: Drupal",
+        "confidence": 0.7,
+        "evidence": "X-Generator references Drupal"
+      },
+      {
+        "type": "path_exists",
+        "path": "/core/misc/drupal.js",
+        "value": "/core/misc/drupal.js",
+        "confidence": 0.55,
+        "evidence": "Drupal core JS exists"
+      },
+      {
+        "type": "path_exists",
+        "path": "/CHANGELOG.txt",
+        "value": "/CHANGELOG.txt",
+        "confidence": 0.25,
+        "evidence": "CHANGELOG.txt exists"
+      }
+    ]
+  },
+  {
+    "name": "Joomla",
+    "category": "cms",
+    "priority": "mvp",
+    "path_probe": true,
+    "rules": [
+      {
+        "type": "meta_generator_contains",
+        "value": "Joomla",
+        "confidence": 0.7,
+        "evidence": "generator meta tag contains Joomla"
+      },
+      {
+        "type": "html_contains",
+        "value": "/media/system/js/",
+        "confidence": 0.4,
+        "evidence": "HTML references Joomla media system JS"
+      },
+      {
+        "type": "html_contains",
+        "value": "/templates/",
+        "confidence": 0.25,
+        "evidence": "HTML references /templates/"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "joomla_",
+        "confidence": 0.45,
+        "evidence": "Set-Cookie contains joomla_"
+      },
+      {
+        "type": "path_exists",
+        "path": "/administrator/",
+        "value": "/administrator/",
+        "confidence": 0.4,
+        "evidence": "/administrator/ exists or redirects"
+      },
+      {
+        "type": "path_exists",
+        "path": "/media/system/js/core.js",
+        "value": "/media/system/js/core.js",
+        "confidence": 0.5,
+        "evidence": "Joomla core.js exists"
+      }
+    ]
+  },
+  {
+    "name": "Magento 2",
+    "category": "ecommerce",
+    "priority": "mvp",
+    "path_probe": true,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Magento_",
+        "confidence": 0.45,
+        "evidence": "HTML references Magento_ modules"
+      },
+      {
+        "type": "html_contains",
+        "value": "/static/frontend/",
+        "confidence": 0.45,
+        "evidence": "HTML references /static/frontend/"
+      },
+      {
+        "type": "html_contains",
+        "value": "mage/cookies",
+        "confidence": 0.45,
+        "evidence": "HTML references mage/cookies"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "mage-cache-sessid",
+        "confidence": 0.55,
+        "evidence": "Set-Cookie contains mage-cache-sessid"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "form_key",
+        "confidence": 0.25,
+        "evidence": "Set-Cookie contains form_key"
+      },
+      {
+        "type": "path_exists",
+        "path": "/static/version",
+        "value": "/static/version",
+        "confidence": 0.25,
+        "evidence": "/static/version exists"
+      }
+    ]
+  },
+  {
+    "name": "PrestaShop",
+    "category": "ecommerce",
+    "priority": "mvp",
+    "path_probe": true,
+    "rules": [
+      {
+        "type": "meta_generator_contains",
+        "value": "PrestaShop",
+        "confidence": 0.75,
+        "evidence": "generator meta tag contains PrestaShop"
+      },
+      {
+        "type": "html_contains",
+        "value": "prestashop",
+        "confidence": 0.45,
+        "evidence": "HTML references prestashop"
+      },
+      {
+        "type": "html_contains",
+        "value": "/modules/",
+        "confidence": 0.2,
+        "evidence": "HTML references /modules/"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "PrestaShop-",
+        "confidence": 0.6,
+        "evidence": "Set-Cookie contains PrestaShop-"
+      },
+      {
+        "type": "path_exists",
+        "path": "/modules/blockcart/",
+        "value": "/modules/blockcart/",
+        "confidence": 0.35,
+        "evidence": "PrestaShop module path exists"
+      }
+    ]
+  },
+  {
+    "name": "OpenCart",
+    "category": "ecommerce",
+    "priority": "mvp",
+    "path_probe": true,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "catalog/view/theme",
+        "confidence": 0.55,
+        "evidence": "HTML references catalog/view/theme"
+      },
+      {
+        "type": "html_contains",
+        "value": "index.php?route=",
+        "confidence": 0.45,
+        "evidence": "HTML references OpenCart route URLs"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "OCSESSID",
+        "confidence": 0.55,
+        "evidence": "Set-Cookie contains OCSESSID"
+      },
+      {
+        "type": "path_exists",
+        "path": "/admin/",
+        "value": "/admin/",
+        "confidence": 0.25,
+        "evidence": "/admin/ exists or redirects"
+      }
+    ]
+  },
+  {
+    "name": "Shopware",
+    "category": "ecommerce",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "shopware",
+        "confidence": 0.45,
+        "evidence": "HTML references Shopware"
+      },
+      {
+        "type": "html_contains",
+        "value": "/bundles/storefront/",
+        "confidence": 0.55,
+        "evidence": "HTML references Shopware storefront bundles"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "shopware",
+        "confidence": 0.45,
+        "evidence": "Set-Cookie references Shopware"
+      }
+    ]
+  },
+  {
+    "name": "Laravel",
+    "category": "framework",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Laravel",
+        "confidence": 0.35,
+        "evidence": "HTML references Laravel"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "laravel_session",
+        "confidence": 0.7,
+        "evidence": "Set-Cookie contains laravel_session"
+      },
+      {
+        "type": "header_contains",
+        "value": "laravel",
+        "confidence": 0.4,
+        "evidence": "headers reference Laravel"
+      },
+      {
+        "type": "title_contains",
+        "value": "Laravel",
+        "confidence": 0.35,
+        "evidence": "title contains Laravel"
+      }
+    ]
+  },
+  {
+    "name": "Symfony",
+    "category": "framework",
+    "priority": "mvp",
+    "path_probe": true,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Symfony",
+        "confidence": 0.35,
+        "evidence": "HTML references Symfony"
+      },
+      {
+        "type": "header_contains",
+        "value": "sf_redirect",
+        "confidence": 0.4,
+        "evidence": "headers reference sf_redirect"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "MOCKSESSID",
+        "confidence": 0.45,
+        "evidence": "Set-Cookie contains MOCKSESSID"
+      },
+      {
+        "type": "path_body_contains",
+        "path": "/_profiler/",
+        "value": "Symfony Profiler",
+        "confidence": 0.75,
+        "evidence": "/_profiler/ exposes Symfony Profiler marker"
+      }
+    ]
+  },
+  {
+    "name": "Django",
+    "category": "framework",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "cookie_contains",
+        "value": "csrftoken",
+        "confidence": 0.35,
+        "evidence": "Set-Cookie contains csrftoken"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "sessionid",
+        "confidence": 0.2,
+        "evidence": "Set-Cookie contains sessionid"
+      },
+      {
+        "type": "html_contains",
+        "value": "csrfmiddlewaretoken",
+        "confidence": 0.55,
+        "evidence": "HTML contains csrfmiddlewaretoken"
+      },
+      {
+        "type": "html_contains",
+        "value": "Django",
+        "confidence": 0.35,
+        "evidence": "HTML references Django"
+      }
+    ]
+  },
+  {
+    "name": "Flask",
+    "category": "framework",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "cookie_contains",
+        "value": "session=",
+        "confidence": 0.2,
+        "evidence": "Set-Cookie contains generic session cookie"
+      },
+      {
+        "type": "html_contains",
+        "value": "Werkzeug",
+        "confidence": 0.55,
+        "evidence": "HTML references Werkzeug"
+      },
+      {
+        "type": "header_contains",
+        "value": "Werkzeug",
+        "confidence": 0.6,
+        "evidence": "headers reference Werkzeug"
+      }
+    ]
+  },
+  {
+    "name": "FastAPI",
+    "category": "framework",
+    "priority": "mvp",
+    "path_probe": true,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "FastAPI",
+        "confidence": 0.55,
+        "evidence": "HTML references FastAPI"
+      },
+      {
+        "type": "path_body_contains",
+        "path": "/docs",
+        "value": "Swagger UI",
+        "confidence": 0.55,
+        "evidence": "/docs exposes Swagger UI marker"
+      },
+      {
+        "type": "path_body_contains",
+        "path": "/openapi.json",
+        "value": "openapi",
+        "confidence": 0.65,
+        "evidence": "/openapi.json contains OpenAPI marker"
+      }
+    ]
+  },
+  {
+    "name": "Ruby on Rails",
+    "category": "framework",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "csrf-param",
+        "confidence": 0.35,
+        "evidence": "HTML contains csrf-param"
+      },
+      {
+        "type": "html_contains",
+        "value": "csrf-token",
+        "confidence": 0.35,
+        "evidence": "HTML contains csrf-token"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "_session",
+        "confidence": 0.2,
+        "evidence": "Set-Cookie contains _session"
+      },
+      {
+        "type": "header_contains",
+        "value": "Phusion Passenger",
+        "confidence": 0.35,
+        "evidence": "headers reference Phusion Passenger"
+      }
+    ]
+  },
+  {
+    "name": "Next.js",
+    "category": "javascript_framework",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "/_next/static/",
+        "confidence": 0.75,
+        "evidence": "HTML references /_next/static/"
+      },
+      {
+        "type": "html_contains",
+        "value": "__NEXT_DATA__",
+        "confidence": 0.8,
+        "evidence": "HTML contains __NEXT_DATA__"
+      },
+      {
+        "type": "header_contains",
+        "value": "x-nextjs-cache",
+        "confidence": 0.65,
+        "evidence": "headers contain x-nextjs-cache"
+      }
+    ]
+  },
+  {
+    "name": "Nuxt",
+    "category": "javascript_framework",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "/_nuxt/",
+        "confidence": 0.75,
+        "evidence": "HTML references /_nuxt/"
+      },
+      {
+        "type": "html_contains",
+        "value": "__NUXT__",
+        "confidence": 0.8,
+        "evidence": "HTML contains __NUXT__"
+      }
+    ]
+  },
+  {
+    "name": "React",
+    "category": "javascript_framework",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "data-reactroot",
+        "confidence": 0.55,
+        "evidence": "HTML contains data-reactroot"
+      },
+      {
+        "type": "html_contains",
+        "value": "react-dom",
+        "confidence": 0.45,
+        "evidence": "HTML references react-dom"
+      },
+      {
+        "type": "html_contains",
+        "value": "__REACT_DEVTOOLS_GLOBAL_HOOK__",
+        "confidence": 0.45,
+        "evidence": "HTML references React devtools hook"
+      }
+    ]
+  },
+  {
+    "name": "Vue.js",
+    "category": "javascript_framework",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "data-v-",
+        "confidence": 0.35,
+        "evidence": "HTML contains Vue scoped CSS marker data-v-"
+      },
+      {
+        "type": "html_contains",
+        "value": "__VUE__",
+        "confidence": 0.45,
+        "evidence": "HTML references Vue marker"
+      },
+      {
+        "type": "html_contains",
+        "value": "vue.js",
+        "confidence": 0.45,
+        "evidence": "HTML references vue.js"
+      }
+    ]
+  },
+  {
+    "name": "Angular",
+    "category": "javascript_framework",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "ng-version",
+        "confidence": 0.65,
+        "evidence": "HTML contains ng-version"
+      },
+      {
+        "type": "html_contains",
+        "value": "ng-app",
+        "confidence": 0.45,
+        "evidence": "HTML contains ng-app"
+      },
+      {
+        "type": "html_contains",
+        "value": "angular.js",
+        "confidence": 0.45,
+        "evidence": "HTML references angular.js"
+      }
+    ]
+  },
+  {
+    "name": "Vite",
+    "category": "javascript_framework",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "/@vite/client",
+        "confidence": 0.75,
+        "evidence": "HTML references /@vite/client"
+      },
+      {
+        "type": "html_contains",
+        "value": "vite.svg",
+        "confidence": 0.35,
+        "evidence": "HTML references vite.svg"
+      }
+    ]
+  },
+  {
+    "name": "Wix",
+    "category": "hosted_builder",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "wixstatic.com",
+        "confidence": 0.75,
+        "evidence": "HTML references wixstatic.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "wix.com",
+        "confidence": 0.35,
+        "evidence": "HTML references wix.com"
+      },
+      {
+        "type": "header_contains",
+        "value": "x-wix",
+        "confidence": 0.65,
+        "evidence": "headers contain x-wix marker"
+      }
+    ]
+  },
+  {
+    "name": "Squarespace",
+    "category": "hosted_builder",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "static1.squarespace.com",
+        "confidence": 0.75,
+        "evidence": "HTML references static1.squarespace.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "squarespace.com",
+        "confidence": 0.45,
+        "evidence": "HTML references squarespace.com"
+      },
+      {
+        "type": "header_contains",
+        "value": "squarespace",
+        "confidence": 0.55,
+        "evidence": "headers reference Squarespace"
+      }
+    ]
+  },
+  {
+    "name": "Webflow",
+    "category": "hosted_builder",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "webflow.js",
+        "confidence": 0.65,
+        "evidence": "HTML references webflow.js"
+      },
+      {
+        "type": "html_contains",
+        "value": "assets.website-files.com",
+        "confidence": 0.75,
+        "evidence": "HTML references Webflow assets CDN"
+      },
+      {
+        "type": "meta_generator_contains",
+        "value": "Webflow",
+        "confidence": 0.75,
+        "evidence": "generator meta tag contains Webflow"
+      }
+    ]
+  },
+  {
+    "name": "Ghost",
+    "category": "cms",
+    "priority": "mvp",
+    "path_probe": true,
+    "rules": [
+      {
+        "type": "meta_generator_contains",
+        "value": "Ghost",
+        "confidence": 0.7,
+        "evidence": "generator meta tag contains Ghost"
+      },
+      {
+        "type": "html_contains",
+        "value": "/ghost/",
+        "confidence": 0.3,
+        "evidence": "HTML references /ghost/"
+      },
+      {
+        "type": "html_contains",
+        "value": "ghost-api",
+        "confidence": 0.55,
+        "evidence": "HTML references ghost-api"
+      },
+      {
+        "type": "path_exists",
+        "path": "/ghost/",
+        "value": "/ghost/",
+        "confidence": 0.45,
+        "evidence": "/ghost/ exists or redirects"
+      }
+    ]
+  },
+  {
+    "name": "Strapi",
+    "category": "headless_cms",
+    "priority": "mvp",
+    "path_probe": true,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "strapi",
+        "confidence": 0.45,
+        "evidence": "HTML references Strapi"
+      },
+      {
+        "type": "path_body_contains",
+        "path": "/admin",
+        "value": "strapi",
+        "confidence": 0.65,
+        "evidence": "/admin contains Strapi marker"
+      }
+    ]
+  },
+  {
+    "name": "phpMyAdmin",
+    "category": "admin_surface",
+    "priority": "mvp",
+    "path_probe": true,
+    "rules": [
+      {
+        "type": "title_contains",
+        "value": "phpMyAdmin",
+        "confidence": 0.75,
+        "evidence": "title contains phpMyAdmin"
+      },
+      {
+        "type": "html_contains",
+        "value": "pma_username",
+        "confidence": 0.75,
+        "evidence": "HTML contains pma_username"
+      },
+      {
+        "type": "path_body_contains",
+        "path": "/phpmyadmin/",
+        "value": "phpMyAdmin",
+        "confidence": 0.8,
+        "evidence": "/phpmyadmin/ contains phpMyAdmin marker"
+      },
+      {
+        "type": "path_body_contains",
+        "path": "/phpMyAdmin/",
+        "value": "phpMyAdmin",
+        "confidence": 0.8,
+        "evidence": "/phpMyAdmin/ contains phpMyAdmin marker"
+      }
+    ]
+  },
+  {
+    "name": "Adminer",
+    "category": "admin_surface",
+    "priority": "mvp",
+    "path_probe": true,
+    "rules": [
+      {
+        "type": "title_contains",
+        "value": "Adminer",
+        "confidence": 0.75,
+        "evidence": "title contains Adminer"
+      },
+      {
+        "type": "html_contains",
+        "value": "Adminer</title>",
+        "confidence": 0.75,
+        "evidence": "HTML title references Adminer"
+      },
+      {
+        "type": "path_body_contains",
+        "path": "/adminer.php",
+        "value": "Adminer",
+        "confidence": 0.85,
+        "evidence": "/adminer.php contains Adminer marker"
+      }
+    ]
+  },
+  {
+    "name": "Grafana",
+    "category": "admin_surface",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "title_contains",
+        "value": "Grafana",
+        "confidence": 0.75,
+        "evidence": "title contains Grafana"
+      },
+      {
+        "type": "html_contains",
+        "value": "grafana-app",
+        "confidence": 0.75,
+        "evidence": "HTML contains grafana-app"
+      },
+      {
+        "type": "html_contains",
+        "value": "public/build/grafana",
+        "confidence": 0.7,
+        "evidence": "HTML references Grafana build assets"
+      }
+    ]
+  },
+  {
+    "name": "Jenkins",
+    "category": "admin_surface",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "header_contains",
+        "value": "X-Jenkins",
+        "confidence": 0.85,
+        "evidence": "headers contain X-Jenkins"
+      },
+      {
+        "type": "html_contains",
+        "value": "Jenkins",
+        "confidence": 0.4,
+        "evidence": "HTML references Jenkins"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "JSESSIONID",
+        "confidence": 0.25,
+        "evidence": "Set-Cookie contains JSESSIONID"
+      }
+    ]
+  },
+  {
+    "name": "GitLab",
+    "category": "admin_surface",
+    "priority": "mvp",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "assets/gitlab",
+        "confidence": 0.65,
+        "evidence": "HTML references GitLab assets"
+      },
+      {
+        "type": "html_contains",
+        "value": "GitLab",
+        "confidence": 0.45,
+        "evidence": "HTML references GitLab"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "_gitlab_session",
+        "confidence": 0.75,
+        "evidence": "Set-Cookie contains _gitlab_session"
+      }
+    ]
+  },
+  {
+    "name": "TYPO3",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "typo3conf/",
+        "confidence": 0.35,
+        "evidence": "HTML references typo3conf/"
+      },
+      {
+        "type": "html_contains",
+        "value": "TYPO3 CMS",
+        "confidence": 0.35,
+        "evidence": "HTML references TYPO3 CMS"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "TYPO3 CMS",
+        "confidence": 0.35,
+        "evidence": "Set-Cookie references TYPO3 CMS"
+      }
+    ]
+  },
+  {
+    "name": "Craft CMS",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Craft CMS",
+        "confidence": 0.35,
+        "evidence": "HTML references Craft CMS"
+      },
+      {
+        "type": "html_contains",
+        "value": "CRAFT_CSRF_TOKEN",
+        "confidence": 0.35,
+        "evidence": "HTML references CRAFT_CSRF_TOKEN"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "CRAFT_CSRF_TOKEN",
+        "confidence": 0.35,
+        "evidence": "Set-Cookie references CRAFT_CSRF_TOKEN"
+      },
+      {
+        "type": "html_contains",
+        "value": "craftcms",
+        "confidence": 0.35,
+        "evidence": "HTML references craftcms"
+      }
+    ]
+  },
+  {
+    "name": "Concrete CMS",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "concrete5",
+        "confidence": 0.35,
+        "evidence": "HTML references concrete5"
+      },
+      {
+        "type": "html_contains",
+        "value": "Concrete CMS",
+        "confidence": 0.35,
+        "evidence": "HTML references Concrete CMS"
+      },
+      {
+        "type": "html_contains",
+        "value": "/concrete/js/",
+        "confidence": 0.35,
+        "evidence": "HTML references /concrete/js/"
+      }
+    ]
+  },
+  {
+    "name": "Grav",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Grav CMS",
+        "confidence": 0.35,
+        "evidence": "HTML references Grav CMS"
+      },
+      {
+        "type": "html_contains",
+        "value": "grav-site",
+        "confidence": 0.35,
+        "evidence": "HTML references grav-site"
+      },
+      {
+        "type": "html_contains",
+        "value": "/user/themes/",
+        "confidence": 0.35,
+        "evidence": "HTML references /user/themes/"
+      }
+    ]
+  },
+  {
+    "name": "October CMS",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "octobercms",
+        "confidence": 0.35,
+        "evidence": "HTML references octobercms"
+      },
+      {
+        "type": "html_contains",
+        "value": "October CMS",
+        "confidence": 0.35,
+        "evidence": "HTML references October CMS"
+      },
+      {
+        "type": "html_contains",
+        "value": "/modules/system/assets/",
+        "confidence": 0.35,
+        "evidence": "HTML references /modules/system/assets/"
+      }
+    ]
+  },
+  {
+    "name": "Bolt CMS",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Bolt CMS",
+        "confidence": 0.35,
+        "evidence": "HTML references Bolt CMS"
+      },
+      {
+        "type": "html_contains",
+        "value": "bolt-public",
+        "confidence": 0.35,
+        "evidence": "HTML references bolt-public"
+      },
+      {
+        "type": "html_contains",
+        "value": "/theme/bolt",
+        "confidence": 0.35,
+        "evidence": "HTML references /theme/bolt"
+      }
+    ]
+  },
+  {
+    "name": "ProcessWire",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "ProcessWire",
+        "confidence": 0.35,
+        "evidence": "HTML references ProcessWire"
+      },
+      {
+        "type": "html_contains",
+        "value": "/site/templates/",
+        "confidence": 0.35,
+        "evidence": "HTML references /site/templates/"
+      },
+      {
+        "type": "html_contains",
+        "value": "wire/modules",
+        "confidence": 0.35,
+        "evidence": "HTML references wire/modules"
+      }
+    ]
+  },
+  {
+    "name": "MODX",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "MODX",
+        "confidence": 0.35,
+        "evidence": "HTML references MODX"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "MODX",
+        "confidence": 0.35,
+        "evidence": "Set-Cookie references MODX"
+      },
+      {
+        "type": "html_contains",
+        "value": "modx.com",
+        "confidence": 0.35,
+        "evidence": "HTML references modx.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "assets/components/",
+        "confidence": 0.35,
+        "evidence": "HTML references assets/components/"
+      }
+    ]
+  },
+  {
+    "name": "Silverstripe CMS",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Silverstripe",
+        "confidence": 0.35,
+        "evidence": "HTML references Silverstripe"
+      },
+      {
+        "type": "html_contains",
+        "value": "SecurityID",
+        "confidence": 0.35,
+        "evidence": "HTML references SecurityID"
+      },
+      {
+        "type": "html_contains",
+        "value": "silverstripe",
+        "confidence": 0.35,
+        "evidence": "HTML references silverstripe"
+      }
+    ]
+  },
+  {
+    "name": "Umbraco",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Umbraco",
+        "confidence": 0.35,
+        "evidence": "HTML references Umbraco"
+      },
+      {
+        "type": "html_contains",
+        "value": "umbraco/",
+        "confidence": 0.35,
+        "evidence": "HTML references umbraco/"
+      },
+      {
+        "type": "html_contains",
+        "value": "UMB_UCONTEXT",
+        "confidence": 0.35,
+        "evidence": "HTML references UMB_UCONTEXT"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "UMB_UCONTEXT",
+        "confidence": 0.35,
+        "evidence": "Set-Cookie references UMB_UCONTEXT"
+      }
+    ]
+  },
+  {
+    "name": "DotNetNuke / DNN",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "DotNetNuke",
+        "confidence": 0.35,
+        "evidence": "HTML references DotNetNuke"
+      },
+      {
+        "type": "html_contains",
+        "value": "DNN Platform",
+        "confidence": 0.35,
+        "evidence": "HTML references DNN Platform"
+      },
+      {
+        "type": "html_contains",
+        "value": "__dnnVariable",
+        "confidence": 0.35,
+        "evidence": "HTML references __dnnVariable"
+      }
+    ]
+  },
+  {
+    "name": "Kentico",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Kentico",
+        "confidence": 0.35,
+        "evidence": "HTML references Kentico"
+      },
+      {
+        "type": "html_contains",
+        "value": "CMSPreferredCulture",
+        "confidence": 0.35,
+        "evidence": "HTML references CMSPreferredCulture"
+      },
+      {
+        "type": "html_contains",
+        "value": "KenticoCMS",
+        "confidence": 0.35,
+        "evidence": "HTML references KenticoCMS"
+      }
+    ]
+  },
+  {
+    "name": "Magnolia CMS",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Magnolia CMS",
+        "confidence": 0.35,
+        "evidence": "HTML references Magnolia CMS"
+      },
+      {
+        "type": "html_contains",
+        "value": "magnolia",
+        "confidence": 0.35,
+        "evidence": "HTML references magnolia"
+      },
+      {
+        "type": "html_contains",
+        "value": "/.resources/",
+        "confidence": 0.35,
+        "evidence": "HTML references /.resources/"
+      }
+    ]
+  },
+  {
+    "name": "Sitecore",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Sitecore",
+        "confidence": 0.35,
+        "evidence": "HTML references Sitecore"
+      },
+      {
+        "type": "html_contains",
+        "value": "SC_ANALYTICS_GLOBAL_COOKIE",
+        "confidence": 0.35,
+        "evidence": "HTML references SC_ANALYTICS_GLOBAL_COOKIE"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "SC_ANALYTICS_GLOBAL_COOKIE",
+        "confidence": 0.35,
+        "evidence": "Set-Cookie references SC_ANALYTICS_GLOBAL_COOKIE"
+      },
+      {
+        "type": "html_contains",
+        "value": "/sitecore/",
+        "confidence": 0.35,
+        "evidence": "HTML references /sitecore/"
+      }
+    ]
+  },
+  {
+    "name": "Adobe Experience Manager / AEM",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "/etc.clientlibs/",
+        "confidence": 0.35,
+        "evidence": "HTML references /etc.clientlibs/"
+      },
+      {
+        "type": "html_contains",
+        "value": "AEM",
+        "confidence": 0.35,
+        "evidence": "HTML references AEM"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "AEM",
+        "confidence": 0.35,
+        "evidence": "Set-Cookie references AEM"
+      },
+      {
+        "type": "html_contains",
+        "value": "cq-",
+        "confidence": 0.35,
+        "evidence": "HTML references cq-"
+      }
+    ]
+  },
+  {
+    "name": "Liferay",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Liferay",
+        "confidence": 0.35,
+        "evidence": "HTML references Liferay"
+      },
+      {
+        "type": "html_contains",
+        "value": "LFR_SESSION_STATE",
+        "confidence": 0.35,
+        "evidence": "HTML references LFR_SESSION_STATE"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "LFR_SESSION_STATE",
+        "confidence": 0.35,
+        "evidence": "Set-Cookie references LFR_SESSION_STATE"
+      },
+      {
+        "type": "html_contains",
+        "value": "com_liferay",
+        "confidence": 0.35,
+        "evidence": "HTML references com_liferay"
+      }
+    ]
+  },
+  {
+    "name": "Plone",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Plone",
+        "confidence": 0.35,
+        "evidence": "HTML references Plone"
+      },
+      {
+        "type": "html_contains",
+        "value": "plone-toolbar",
+        "confidence": 0.35,
+        "evidence": "HTML references plone-toolbar"
+      },
+      {
+        "type": "html_contains",
+        "value": "portal_url",
+        "confidence": 0.35,
+        "evidence": "HTML references portal_url"
+      }
+    ]
+  },
+  {
+    "name": "Statamic",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Statamic",
+        "confidence": 0.35,
+        "evidence": "HTML references Statamic"
+      },
+      {
+        "type": "html_contains",
+        "value": "statamic",
+        "confidence": 0.35,
+        "evidence": "HTML references statamic"
+      },
+      {
+        "type": "html_contains",
+        "value": "/cp/",
+        "confidence": 0.35,
+        "evidence": "HTML references /cp/"
+      }
+    ]
+  },
+  {
+    "name": "ExpressionEngine",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "ExpressionEngine",
+        "confidence": 0.35,
+        "evidence": "HTML references ExpressionEngine"
+      },
+      {
+        "type": "html_contains",
+        "value": "exp_tracker",
+        "confidence": 0.35,
+        "evidence": "HTML references exp_tracker"
+      },
+      {
+        "type": "html_contains",
+        "value": "EE",
+        "confidence": 0.35,
+        "evidence": "HTML references EE"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "EE",
+        "confidence": 0.35,
+        "evidence": "Set-Cookie references EE"
+      }
+    ]
+  },
+  {
+    "name": "Textpattern",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Textpattern",
+        "confidence": 0.35,
+        "evidence": "HTML references Textpattern"
+      },
+      {
+        "type": "html_contains",
+        "value": "textpattern",
+        "confidence": 0.35,
+        "evidence": "HTML references textpattern"
+      }
+    ]
+  },
+  {
+    "name": "Kirby CMS",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Kirby",
+        "confidence": 0.35,
+        "evidence": "HTML references Kirby"
+      },
+      {
+        "type": "html_contains",
+        "value": "kirbytext",
+        "confidence": 0.35,
+        "evidence": "HTML references kirbytext"
+      },
+      {
+        "type": "html_contains",
+        "value": "/media/site/",
+        "confidence": 0.35,
+        "evidence": "HTML references /media/site/"
+      }
+    ]
+  },
+  {
+    "name": "Contao",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Contao",
+        "confidence": 0.35,
+        "evidence": "HTML references Contao"
+      },
+      {
+        "type": "html_contains",
+        "value": "contao",
+        "confidence": 0.35,
+        "evidence": "HTML references contao"
+      },
+      {
+        "type": "html_contains",
+        "value": "tl_files",
+        "confidence": 0.35,
+        "evidence": "HTML references tl_files"
+      }
+    ]
+  },
+  {
+    "name": "Redaxo",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "REDAXO",
+        "confidence": 0.35,
+        "evidence": "HTML references REDAXO"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "REDAXO",
+        "confidence": 0.35,
+        "evidence": "Set-Cookie references REDAXO"
+      },
+      {
+        "type": "html_contains",
+        "value": "redaxo",
+        "confidence": 0.35,
+        "evidence": "HTML references redaxo"
+      }
+    ]
+  },
+  {
+    "name": "SPIP",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "SPIP",
+        "confidence": 0.35,
+        "evidence": "HTML references SPIP"
+      },
+      {
+        "type": "cookie_contains",
+        "value": "SPIP",
+        "confidence": 0.35,
+        "evidence": "Set-Cookie references SPIP"
+      },
+      {
+        "type": "html_contains",
+        "value": "spip.php",
+        "confidence": 0.35,
+        "evidence": "HTML references spip.php"
+      },
+      {
+        "type": "html_contains",
+        "value": "spip_cache",
+        "confidence": 0.35,
+        "evidence": "HTML references spip_cache"
+      }
+    ]
+  },
+  {
+    "name": "Backdrop CMS",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Backdrop CMS",
+        "confidence": 0.35,
+        "evidence": "HTML references Backdrop CMS"
+      },
+      {
+        "type": "html_contains",
+        "value": "backdrop",
+        "confidence": 0.35,
+        "evidence": "HTML references backdrop"
+      },
+      {
+        "type": "html_contains",
+        "value": "core/misc/backdrop",
+        "confidence": 0.35,
+        "evidence": "HTML references core/misc/backdrop"
+      }
+    ]
+  },
+  {
+    "name": "CMS Made Simple",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "CMS Made Simple",
+        "confidence": 0.35,
+        "evidence": "HTML references CMS Made Simple"
+      },
+      {
+        "type": "html_contains",
+        "value": "cmsms",
+        "confidence": 0.35,
+        "evidence": "HTML references cmsms"
+      }
+    ]
+  },
+  {
+    "name": "Microweber",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Microweber",
+        "confidence": 0.35,
+        "evidence": "HTML references Microweber"
+      },
+      {
+        "type": "html_contains",
+        "value": "microweber",
+        "confidence": 0.35,
+        "evidence": "HTML references microweber"
+      }
+    ]
+  },
+  {
+    "name": "Subrion",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Subrion",
+        "confidence": 0.35,
+        "evidence": "HTML references Subrion"
+      },
+      {
+        "type": "html_contains",
+        "value": "subrion",
+        "confidence": 0.35,
+        "evidence": "HTML references subrion"
+      }
+    ]
+  },
+  {
+    "name": "WonderCMS",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "WonderCMS",
+        "confidence": 0.35,
+        "evidence": "HTML references WonderCMS"
+      },
+      {
+        "type": "html_contains",
+        "value": "wondercms",
+        "confidence": 0.35,
+        "evidence": "HTML references wondercms"
+      }
+    ]
+  },
+  {
+    "name": "Pico CMS",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Pico CMS",
+        "confidence": 0.35,
+        "evidence": "HTML references Pico CMS"
+      },
+      {
+        "type": "html_contains",
+        "value": "picocms",
+        "confidence": 0.35,
+        "evidence": "HTML references picocms"
+      }
+    ]
+  },
+  {
+    "name": "GetSimple CMS",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "GetSimple",
+        "confidence": 0.35,
+        "evidence": "HTML references GetSimple"
+      },
+      {
+        "type": "html_contains",
+        "value": "getsimple",
+        "confidence": 0.35,
+        "evidence": "HTML references getsimple"
+      }
+    ]
+  },
+  {
+    "name": "Bludit",
+    "category": "cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Bludit",
+        "confidence": 0.35,
+        "evidence": "HTML references Bludit"
+      },
+      {
+        "type": "html_contains",
+        "value": "bludit",
+        "confidence": 0.35,
+        "evidence": "HTML references bludit"
+      }
+    ]
+  },
+  {
+    "name": "Weebly",
+    "category": "hosted_builder",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "weebly.com",
+        "confidence": 0.35,
+        "evidence": "HTML references weebly.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "weeblysite.com",
+        "confidence": 0.35,
+        "evidence": "HTML references weeblysite.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "weebly-footer",
+        "confidence": 0.35,
+        "evidence": "HTML references weebly-footer"
+      }
+    ]
+  },
+  {
+    "name": "GoDaddy Website Builder",
+    "category": "hosted_builder",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "img1.wsimg.com",
+        "confidence": 0.35,
+        "evidence": "HTML references img1.wsimg.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "godaddysites.com",
+        "confidence": 0.35,
+        "evidence": "HTML references godaddysites.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "wsimg.com",
+        "confidence": 0.35,
+        "evidence": "HTML references wsimg.com"
+      }
+    ]
+  },
+  {
+    "name": "Duda",
+    "category": "hosted_builder",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "dudamobile.com",
+        "confidence": 0.35,
+        "evidence": "HTML references dudamobile.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "duda.co",
+        "confidence": 0.35,
+        "evidence": "HTML references duda.co"
+      },
+      {
+        "type": "html_contains",
+        "value": "dmResp",
+        "confidence": 0.35,
+        "evidence": "HTML references dmResp"
+      }
+    ]
+  },
+  {
+    "name": "Jimdo",
+    "category": "hosted_builder",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "jimdo.com",
+        "confidence": 0.35,
+        "evidence": "HTML references jimdo.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "jimcdn.com",
+        "confidence": 0.35,
+        "evidence": "HTML references jimcdn.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "jimdo",
+        "confidence": 0.35,
+        "evidence": "HTML references jimdo"
+      }
+    ]
+  },
+  {
+    "name": "Tilda",
+    "category": "hosted_builder",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "tildacdn.com",
+        "confidence": 0.35,
+        "evidence": "HTML references tildacdn.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "tilda.cc",
+        "confidence": 0.35,
+        "evidence": "HTML references tilda.cc"
+      },
+      {
+        "type": "html_contains",
+        "value": "t-rec",
+        "confidence": 0.35,
+        "evidence": "HTML references t-rec"
+      }
+    ]
+  },
+  {
+    "name": "Strikingly",
+    "category": "hosted_builder",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "strikinglycdn.com",
+        "confidence": 0.35,
+        "evidence": "HTML references strikinglycdn.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "strikingly.com",
+        "confidence": 0.35,
+        "evidence": "HTML references strikingly.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "sxl.cn",
+        "confidence": 0.35,
+        "evidence": "HTML references sxl.cn"
+      }
+    ]
+  },
+  {
+    "name": "Framer",
+    "category": "hosted_builder",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "framerusercontent.com",
+        "confidence": 0.35,
+        "evidence": "HTML references framerusercontent.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "framer.website",
+        "confidence": 0.35,
+        "evidence": "HTML references framer.website"
+      },
+      {
+        "type": "html_contains",
+        "value": "data-framer",
+        "confidence": 0.35,
+        "evidence": "HTML references data-framer"
+      }
+    ]
+  },
+  {
+    "name": "Carrd",
+    "category": "hosted_builder",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "carrd.co",
+        "confidence": 0.35,
+        "evidence": "HTML references carrd.co"
+      },
+      {
+        "type": "html_contains",
+        "value": "carrd",
+        "confidence": 0.35,
+        "evidence": "HTML references carrd"
+      }
+    ]
+  },
+  {
+    "name": "Bubble",
+    "category": "hosted_builder",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "bubble.io",
+        "confidence": 0.35,
+        "evidence": "HTML references bubble.io"
+      },
+      {
+        "type": "html_contains",
+        "value": "bubbleapps.io",
+        "confidence": 0.35,
+        "evidence": "HTML references bubbleapps.io"
+      },
+      {
+        "type": "html_contains",
+        "value": "data-bubble",
+        "confidence": 0.35,
+        "evidence": "HTML references data-bubble"
+      }
+    ]
+  },
+  {
+    "name": "Softr",
+    "category": "hosted_builder",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "softr.io",
+        "confidence": 0.35,
+        "evidence": "HTML references softr.io"
+      },
+      {
+        "type": "html_contains",
+        "value": "softr-assets",
+        "confidence": 0.35,
+        "evidence": "HTML references softr-assets"
+      },
+      {
+        "type": "html_contains",
+        "value": "softr",
+        "confidence": 0.35,
+        "evidence": "HTML references softr"
+      }
+    ]
+  },
+  {
+    "name": "Readymag",
+    "category": "hosted_builder",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "readymag.com",
+        "confidence": 0.35,
+        "evidence": "HTML references readymag.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "readymag",
+        "confidence": 0.35,
+        "evidence": "HTML references readymag"
+      }
+    ]
+  },
+  {
+    "name": "Format",
+    "category": "hosted_builder",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "format.com",
+        "confidence": 0.35,
+        "evidence": "HTML references format.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "format-assets",
+        "confidence": 0.35,
+        "evidence": "HTML references format-assets"
+      }
+    ]
+  },
+  {
+    "name": "Cargo",
+    "category": "hosted_builder",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "cargo.site",
+        "confidence": 0.35,
+        "evidence": "HTML references cargo.site"
+      },
+      {
+        "type": "html_contains",
+        "value": "cargo collective",
+        "confidence": 0.35,
+        "evidence": "HTML references cargo collective"
+      },
+      {
+        "type": "html_contains",
+        "value": "cargo",
+        "confidence": 0.35,
+        "evidence": "HTML references cargo"
+      }
+    ]
+  },
+  {
+    "name": "HubSpot CMS",
+    "category": "hosted_cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "hs-scripts.com",
+        "confidence": 0.35,
+        "evidence": "HTML references hs-scripts.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "hubspot",
+        "confidence": 0.35,
+        "evidence": "HTML references hubspot"
+      },
+      {
+        "type": "html_contains",
+        "value": "hsforms",
+        "confidence": 0.35,
+        "evidence": "HTML references hsforms"
+      }
+    ]
+  },
+  {
+    "name": "Contentful",
+    "category": "headless_cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "contentful.com",
+        "confidence": 0.35,
+        "evidence": "HTML references contentful.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "ctfassets.net",
+        "confidence": 0.35,
+        "evidence": "HTML references ctfassets.net"
+      },
+      {
+        "type": "html_contains",
+        "value": "contentful",
+        "confidence": 0.35,
+        "evidence": "HTML references contentful"
+      }
+    ]
+  },
+  {
+    "name": "Sanity",
+    "category": "headless_cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "sanity.io",
+        "confidence": 0.35,
+        "evidence": "HTML references sanity.io"
+      },
+      {
+        "type": "html_contains",
+        "value": "cdn.sanity.io",
+        "confidence": 0.35,
+        "evidence": "HTML references cdn.sanity.io"
+      },
+      {
+        "type": "html_contains",
+        "value": "sanity",
+        "confidence": 0.35,
+        "evidence": "HTML references sanity"
+      }
+    ]
+  },
+  {
+    "name": "Storyblok",
+    "category": "headless_cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "storyblok.com",
+        "confidence": 0.35,
+        "evidence": "HTML references storyblok.com"
+      },
+      {
+        "type": "html_contains",
+        "value": "storyblok",
+        "confidence": 0.35,
+        "evidence": "HTML references storyblok"
+      },
+      {
+        "type": "html_contains",
+        "value": "a.storyblok.com",
+        "confidence": 0.35,
+        "evidence": "HTML references a.storyblok.com"
+      }
+    ]
+  },
+  {
+    "name": "Prismic",
+    "category": "headless_cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "prismic.io",
+        "confidence": 0.35,
+        "evidence": "HTML references prismic.io"
+      },
+      {
+        "type": "html_contains",
+        "value": "prismic",
+        "confidence": 0.35,
+        "evidence": "HTML references prismic"
+      },
+      {
+        "type": "html_contains",
+        "value": "prismic.cdn",
+        "confidence": 0.35,
+        "evidence": "HTML references prismic.cdn"
+      }
+    ]
+  },
+  {
+    "name": "Directus",
+    "category": "headless_cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "Directus",
+        "confidence": 0.35,
+        "evidence": "HTML references Directus"
+      },
+      {
+        "type": "html_contains",
+        "value": "directus",
+        "confidence": 0.35,
+        "evidence": "HTML references directus"
+      },
+      {
+        "type": "html_contains",
+        "value": "/admin/assets/",
+        "confidence": 0.35,
+        "evidence": "HTML references /admin/assets/"
+      }
+    ]
+  },
+  {
+    "name": "DatoCMS",
+    "category": "headless_cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "datocms",
+        "confidence": 0.35,
+        "evidence": "HTML references datocms"
+      },
+      {
+        "type": "html_contains",
+        "value": "datocms-assets.com",
+        "confidence": 0.35,
+        "evidence": "HTML references datocms-assets.com"
+      }
+    ]
+  },
+  {
+    "name": "Hygraph",
+    "category": "headless_cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "hygraph",
+        "confidence": 0.35,
+        "evidence": "HTML references hygraph"
+      },
+      {
+        "type": "html_contains",
+        "value": "graphcms",
+        "confidence": 0.35,
+        "evidence": "HTML references graphcms"
+      },
+      {
+        "type": "html_contains",
+        "value": "graphassets.com",
+        "confidence": 0.35,
+        "evidence": "HTML references graphassets.com"
+      }
+    ]
+  },
+  {
+    "name": "ButterCMS",
+    "category": "headless_cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "buttercms",
+        "confidence": 0.35,
+        "evidence": "HTML references buttercms"
+      },
+      {
+        "type": "html_contains",
+        "value": "buttercms.com",
+        "confidence": 0.35,
+        "evidence": "HTML references buttercms.com"
+      }
+    ]
+  },
+  {
+    "name": "Netlify CMS / Decap CMS",
+    "category": "headless_cms",
+    "priority": "extended",
+    "path_probe": false,
+    "rules": [
+      {
+        "type": "html_contains",
+        "value": "netlify-cms",
+        "confidence": 0.35,
+        "evidence": "HTML references netlify-cms"
+      },
+      {
+        "type": "html_contains",
+        "value": "decap-cms",
+        "confidence": 0.35,
+        "evidence": "HTML references decap-cms"
+      },
+      {
+        "type": "html_contains",
+        "value": "identity.netlify.com",
+        "confidence": 0.35,
+        "evidence": "HTML references identity.netlify.com"
+      }
+    ]
+  }
+]

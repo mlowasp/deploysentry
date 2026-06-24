@@ -26,6 +26,7 @@ async def run_scan(args) -> int:
         pro=args.pro,
         api_key=args.api_key,
         api_key_env=args.api_key_env,
+        technology_fingerprinting=not args.no_tech_fingerprint,
     )
     async def event(e):
         t=e.get('type')
@@ -34,6 +35,7 @@ async def run_scan(args) -> int:
         elif t == 'service_found': print(f"[service] {e['service'].url} {e['service'].status_code}")
         elif t == 'finding_found': print(f"[finding] {e['finding'].severity.upper()} {e['finding'].url}")
         elif t == 'shodan_info_found': print(f"[shodan] {e['ip']} {len(e['shodan'].ports)} passive ports")
+        elif t == 'technology_detected': print(f"[tech] {e['technology'].name} {e['technology'].url} confidence={e['technology'].confidence:.2f}")
         elif t == 'scan_log': print(f"[log] {e.get('message', '')}")
         elif t == 'scan_error': print(f"[error] {e['message']}")
         elif t == 'scan_finished': print('[done] scan finished')
@@ -63,6 +65,7 @@ def build_parser() -> argparse.ArgumentParser:
     scan.add_argument('--pro', action='store_true')
     scan.add_argument('--api-key')
     scan.add_argument('--api-key-env', default='DEPLOYSENTRY_API_KEY')
+    scan.add_argument('--no-tech-fingerprint', action='store_true', help='Disable CMS/framework/e-commerce fingerprinting')
     return p
 
 def main(argv: list[str] | None = None) -> int:

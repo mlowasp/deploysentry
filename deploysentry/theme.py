@@ -96,7 +96,7 @@ Button:hover { background: #1a1430; }
 DataTable { border: heavy #39fff3; background: #050913; height: 1fr; width: 100%; }
 #findings { border: heavy #ff3df2; }
 #log { border: heavy #55ff99; height: 10; background: #03050a; }
-#status { border: heavy #ffd166; height: 5; background: #090d18; }
+#status { border: heavy #ffd166; height: 3; background: #090d18; }
 #assets { width: 100%; height: 1fr; }
 .panel-title { color: #ff3df2; text-style: bold; }
 """

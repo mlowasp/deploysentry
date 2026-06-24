@@ -4,7 +4,9 @@ DeploySentry is a defensive web surface and deployment exposure monitor for auth
 
 > DeploySentry is intended for authorized defensive scanning only. Only scan domains you own or have permission to test.
 
-![Alt text](/screenshot.png?raw=true "TUI")
+## Screenshots
+
+![TUI](/screenshot.png?raw=true "TUI")
 
 ## Features
 
@@ -94,18 +96,6 @@ Each scan can produce:
 
 Reports include scan metadata, assets, live services, findings by severity, recommendations, and network verification metadata. Reports never include secret values, API keys, proxy credentials, or sensitive response bodies.
 
-## Screenshots
-
-Screenshots placeholder:
-
-```text
-┌ DEPLOYSENTRY // Deployment Exposure Monitor ───────────────┐
-│ Target: example.com                    [ Start Scan ]     │
-├ Assets / Subdomains ──────────┬ Findings ────────────────┤
-│ app.example.com               │ CRITICAL /.env            │
-└ Live Log ─────────────────────────────────────────────────┘
-```
-
 ## Safety and legal note
 
 Use DeploySentry only on domains that you own or are explicitly authorized to test. DeploySentry does not exploit vulnerabilities, clone repositories, brute force credentials, bypass authentication, or dump secrets. It only checks for known safe paths and stores redacted evidence.
@@ -151,3 +141,23 @@ Resolved subdomains now update the Assets table with A, AAAA, and CNAME records 
 ## Shodan Passive Enrichment
 
 DeploySentry passively checks Shodan host pages for every discovered A record, using the current network route when Tor or proxies are enabled. This reads `https://www.shodan.io/host/<ip>` and parses general host information, banners, and ports already indexed by Shodan. It is not active port verification and does not connect to target ports.
+
+## Technology Fingerprinting
+
+DeploySentry includes a JSON-driven technology fingerprinting engine for defensive discovery of common CMS, hosted builders, e-commerce platforms, web frameworks, and exposed admin surfaces.
+
+Fingerprint rules live in:
+
+```text
+deploysentry/data/technology_fingerprints.json
+```
+
+The MVP rules include WordPress, WooCommerce, Shopify, Drupal, Joomla, Magento 2, PrestaShop, OpenCart, Shopware, Laravel, Symfony, Django, Flask, FastAPI, Ruby on Rails, Next.js, Nuxt, React, Vue.js, Angular, Vite, Wix, Squarespace, Webflow, Ghost, Strapi, phpMyAdmin, Adminer, Grafana, Jenkins, GitLab, plus high-priority CMS and hosted-builder fingerprints.
+
+Detection uses passive page signals such as headers, cookies, generator meta tags, title markers and HTML asset paths. For selected high-priority technologies, DeploySentry performs a capped set of safe public path checks such as `/wp-login.php`, `/ghost/`, `/docs`, or `/phpmyadmin/`. It does not exploit vulnerabilities or authenticate.
+
+Disable fingerprinting in direct CLI mode with:
+
+```bash
+deploysentry scan example.com --no-tech-fingerprint
+```

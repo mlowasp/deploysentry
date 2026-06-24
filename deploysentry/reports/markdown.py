@@ -4,6 +4,27 @@ from collections import Counter
 from deploysentry.models import ScanResult
 
 
+def _technology_section(result: ScanResult) -> list[str]:
+    if not result.technologies:
+        return []
+    lines = [
+        "",
+        "## Technology Fingerprints",
+        "",
+        "Detected CMS, hosted builders, e-commerce platforms, frameworks, and exposed admin surfaces.",
+        "",
+        "| Technology | Category | Asset | URL | Confidence | Evidence |",
+        "|---|---|---|---|---:|---|",
+    ]
+    for tech in sorted(result.technologies, key=lambda t: (t.asset, -t.confidence, t.name)):
+        evidence = ", ".join(tech.evidence[:5]) or "—"
+        lines.append(
+            f"| {tech.name} | {tech.version or '—'} | {tech.category} | {tech.asset} | {tech.url} | "
+            f"{tech.confidence:.2f} | {evidence} |"
+        )
+    return lines
+
+
 def _shodan_section(result: ScanResult) -> list[str]:
     if not result.shodan_hosts:
         return []
@@ -36,6 +57,7 @@ def write_markdown_report(result: ScanResult, outdir: Path) -> Path:
         f"- Finished: {result.finished_at}",
         f"- Subdomains found: {len(result.subdomains)}",
         f"- Live services: {len(result.services)}",
+        f"- Technologies detected: {len(result.technologies)}",
         f"- Shodan passive hosts: {len(result.shodan_hosts)}",
         "",
         "## Findings by Severity", "",
@@ -57,6 +79,7 @@ def write_markdown_report(result: ScanResult, outdir: Path) -> Path:
             f"- Route: {f.route.route_label}",
             f"- Recommendation: {f.recommendation}", "",
         ]
+    lines += _technology_section(result)
     lines += _shodan_section(result)
     path = outdir / 'report.md'
     path.write_text('\n'.join(lines), encoding='utf-8')

@@ -28,7 +28,7 @@ class ProxyListModal(ModalScreen[str | None]):
 
     #proxy-modal {
         width: 96;
-        height: 30;
+        height: 31;
         border: heavy #39fff3;
         background: #090d18;
         padding: 1 2;
@@ -43,7 +43,7 @@ class ProxyListModal(ModalScreen[str | None]):
 
     #proxy-help {
         color: #d8fff8;
-        height: 4;
+        height: 5;
         margin-bottom: 1;
     }
 
@@ -83,6 +83,7 @@ class ProxyListModal(ModalScreen[str | None]):
             yield Label('DEPLOYSENTRY // Proxy List', id='proxy-title')
             yield Static(
                 'Paste one proxy per line. Supported: http://, https://, socks4://, socks5://. '
+                'Use Shift+Insert to paste inside this terminal modal; mouse/right-click paste may be intercepted by your terminal. '
                 'Credentials are accepted but never printed in logs or reports. Blank lines and # comments are ignored.',
                 id='proxy-help',
             )
@@ -203,9 +204,8 @@ class ApiKeyModal(ModalScreen[str | None]):
         self.dismiss(None)
 
 class DeploySentryApp(App):
-
-    TITLE = "DeploySentry"
-    
+    TITLE = 'DeploySentry'
+    SUB_TITLE = 'Deployment Exposure Monitor'
     CSS = CYBERPUNK_CSS
     # Input-safe shortcuts only. Plain single-letter shortcuts can intercept typing
     # in Textual Input widgets depending on Textual/terminal versions.
@@ -359,6 +359,8 @@ class DeploySentryApp(App):
             pass
 
     def _add_or_update_asset(self, host: str, a: str = '', aaaa: str = '', cname: str = '') -> None:
+        if not (a or aaaa or cname):
+            return
         a = self._format_records(a, 80)
         aaaa = self._format_records(aaaa, 100)
         cname = self._format_records(cname, 100)
@@ -623,16 +625,18 @@ class DeploySentryApp(App):
             self.log_line(f"[cyan]Starting scan for {event['domain']}[/cyan]")
         elif typ == 'subdomain_found':
             source = event.get('source', 'discovery')
-            self._add_or_update_asset(event['host'])
-            self._add_asset_info_finding(event['host'], 'Asset discovered', f'source: {source}')
-            self.log_line(f"Found subdomain: {event['host']}")
+            # Keep unverified candidates out of the Assets/Findings tables.
+            # They will be displayed only if DNS returns at least one A, AAAA, or CNAME record.
+            self.log_line(f"Found candidate subdomain: {event['host']} ({source})")
         elif typ == 'dns_resolved':
             rec = event['record']
             a = ', '.join(rec.a)
             aaaa = ', '.join(rec.aaaa)
             cname = ', '.join(rec.cname)
-            self._add_or_update_asset(rec.host, a, aaaa, cname)
-            if rec.resolved:
+            has_dns_records = bool(a or aaaa or cname)
+            if has_dns_records:
+                self._add_or_update_asset(rec.host, a, aaaa, cname)
+            if rec.resolved and has_dns_records:
                 detail_parts = []
                 if a:
                     detail_parts.append(f'A: {self._format_records(a, 80)}')
@@ -652,6 +656,20 @@ class DeploySentryApp(App):
             self.log_line(f"Checked {event['url']} -> {event.get('status')}")
         elif typ == 'scan_log':
             self.log_line(f"[dim]{event.get('message', '')}[/dim]")
+        elif typ == 'technology_detected':
+            tech = event['technology']
+            if tech.confidence < 0.55:
+                return
+            confidence_pct = int(round(tech.confidence * 100))
+            version = getattr(tech, 'version', None)
+            details = f"{tech.category} | confidence: {confidence_pct}%"
+            if version:
+                details += f" | version: {version}"
+            if tech.evidence:
+                details += f" | {self._format_records(', '.join(tech.evidence), 90)}"
+            title = f"Tech: {tech.name}" + (f" {version}" if version else '')
+            self.query_one('#findings', DataTable).add_row('INFO', title, tech.asset, details, tech.url)
+            self.log_line(f"[green]Technology detected[/green] {tech.name}{f' {version}' if version else ''} on {tech.url} ({confidence_pct}%)")
         elif typ == 'shodan_info_found':
             shodan = event['shodan']
             ip = event.get('ip', shodan.ip)

@@ -71,6 +71,17 @@ class Finding(BaseModel):
     pro_verification: dict[str, Any] | None = None
 
 
+class TechnologyDetection(BaseModel):
+    name: str
+    category: str
+    asset: str
+    url: str
+    confidence: float
+    evidence: list[str] = Field(default_factory=list)
+    version: str | None = None
+    first_seen: datetime = Field(default_factory=utcnow)
+
+
 class ShodanPort(BaseModel):
     port: int
     protocol: str = "tcp"
@@ -115,6 +126,7 @@ class ScanConfig(BaseModel):
     use_ct: bool = True
     use_rapiddns: bool = True
     shodan_enrichment: bool = True
+    technology_fingerprinting: bool = True
     proxy_file: str | None = None
     proxy_mode: Literal["off", "rotate", "sticky"] = "off"
     tor: bool = False
@@ -133,6 +145,7 @@ class ScanResult(BaseModel):
     services: list[HTTPService] = Field(default_factory=list)
     findings: list[Finding] = Field(default_factory=list)
     shodan_hosts: list[ShodanHostInfo] = Field(default_factory=list)
+    technologies: list[TechnologyDetection] = Field(default_factory=list)
     network: NetworkVerification = Field(default_factory=NetworkVerification)
     errors: list[str] = Field(default_factory=list)
 
